@@ -46,7 +46,7 @@ export default function Login() {
       console.error(error)
       setIsLoading(false)
     })
-    
+
   }
   return (
     <>
@@ -64,7 +64,7 @@ export default function Login() {
               </div>
               <div className="bottom">
                 <h4 className='text-center'>Login</h4>
-                <form onSubmit={(e) => handleLogin(e)} method='POST'name='form01' >
+                <form onSubmit={(e) => handleLogin(e)} method='POST' name='form01' >
                   <label className='label_username'>Username:</label>
                   <input type="text" name="username" id="username_input" value={loginData.username} onChange={(e) => handleChange(e)} placeholder='Enter username' required autoComplete='admin1' />
                   <b className='input_error'>Username is required!</b>
@@ -92,10 +92,10 @@ export default function Login() {
           <div className="login-right-side"></div>
         </div>
         <div className="footer">
-        <span>All Copyrights Reserved 2023 &copy; FS Bank Online Develop by M. Shahzaib Ramzan</span>
+          <span>All Copyrights Reserved 2023 &copy; FS Bank Online Develop by M. Shahzaib Ramzan</span>
+        </div>
       </div>
-      </div>
-      
+
 
     </>
   )
