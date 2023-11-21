@@ -20,7 +20,7 @@ export default function AdminAuthContextProvider({ children }) {
    const [state, dispatch] = useReducer(authReducer, initialState);
 
    useEffect(()=>{
-    const token = window.localStorage.getItem("token");
+    const token = window.sessionStorage.getItem("token");
     if(token)
     {
         const adminData = jwtDecode(token).userData;

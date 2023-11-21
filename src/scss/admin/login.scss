@@ -1,118 +1,177 @@
-.main-login-bg{
+.main-login-bg {
     width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-image:url("../../assets/imgs/login_bg.jpg");
+    background-image: url("../../assets/imgs/login_bg.jpg");
     position: absolute;
 }
-.main-login{
+
+.main-login {
     width: 100%;
     height: 100vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     background-color: $secondary;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     z-index: 1;
     opacity: 0.9;
-    .login-center-side{
-        background-color: white;
-        color: $secondary;
-        padding-left: 2px;
-        width: 90%;
-        height: 450px;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        padding-top: 10px;
-        font-size: 18px;
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        @include md{
-            width: 33%;
+    
+    .login-top {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        .login-left-side {
+            width: 10%;
         }
-        .login-box{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            .top{
-                width: 100%;
-                padding: 5px;
-                h5{
-                    width: 200px;
-                    background-color: $secondary;
-                    color: white;
-                    padding: 15px;
-                    border-top-right-radius: 10px;
-                    border-bottom-right-radius: 10px;
-                    font-size: 20px;
-                    font-weight: bold;
-                }
-                
+
+        .login-center-side {
+            background-color: white;
+            color: $secondary;
+            padding-left: 2px;
+            width: 90%;
+            height: 450px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            padding-top: 10px;
+            font-size: 18px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+            @include md {
+                width: 33%;
             }
-            .bottom{
-                width: 90%;
-               
-                h4{
-                    padding-top: 10px;
-                    font-size: 22px;
-                    font-weight: bold;
-                }
-                input{
-                    display: inline-block;
+
+            .login-box {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .top {
                     width: 100%;
-                    height: 40px;
                     padding: 5px;
-                    // margin-top: 10px;
-                    margin-bottom: 10px;
-                    border: 2px solid $secondary;
-                    color: $secondary;
-                    font-weight: 400;
-                    font-size: 18px;
-                    border-top-right-radius: 10px;
-                    border-bottom-right-radius: 10px;
-                    &:focus{
-                        border: 2px solid $secondary;
-                        background-color: whitesmoke;
-                        outline: none;
+
+                    h5 {
+                        width: 200px;
+                        background-color: $secondary;
+                        color: white;
+                        padding: 15px;
+                        border-top-right-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                        font-size: 20px;
+                        font-weight: bold;
                     }
-                    &:active{
+
+                }
+
+                .bottom {
+                    width: 90%;
+
+                    h4 {
+                        padding-top: 10px;
+                        font-size: 22px;
+                        font-weight: bold;
+                    }
+                    .input_error{
+                        font-size: 10px;
+                        color: rgb(80, 0, 0);
+                        display: none;
+                    }
+                    input {
+                        display: inline-block;
+                        width: 95%;
+                        height: 40px;
+                        padding: 5px;
+                        // // margin-top: 10px;
+                        margin-bottom: 5px;
+                        border: 2px solid $secondary;
+                        color: $secondary;
+                        font-weight: 400;
+                        font-size: 18px;
+                        border-top-right-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                        transition: 0.4s ease-in;
+                        &:focus {
+                            border: 2px solid $secondary;
+                            background-color: whitesmoke;
+                            outline: none;      
+                        }
                         
-                        border: 2px solid $secondary;
+                        // &:invalid{
+                        //     border: 2px solid rgb(80, 0, 0);
+                        //     + .input_error{
+                        //         display: block;
+                        //     }
+                            
+                        // }
+                        &:hover{        
+                            width: 100%;
+                        }
+                        
+                        &:active {
+
+                            border: 2px solid $secondary;
+                        }
                     }
-                }
-                a{
-                    font-size: 12px;
-                    color: $secondary;
-                }
-                button{
-                    margin-top: 10px;
-                    background-color: $secondary;
-                    color: white;
-                    font-weight: bold;
-                    border-top-right-radius: 10px;
-                    border-bottom-right-radius: 10px;
-                    border: none;
-                    height: 40px;
-                    width: 100%;
-                    font-size: 18px;
-                    transition: 0.5s ease;
-                    border: 2px solid $secondary;
-                    &:hover{
-                        border: 2px solid $secondary;
-                        background-color: transparent;
+                    a {
+                        font-size: 12px;
                         color: $secondary;
                     }
-                    svg{
+
+                    button {
+                        margin-top: 10px;
+                        background-color: $secondary;
+                        color: white;
+                        font-weight: bold;
+                        border-top-right-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                        border: none;
+                        height: 40px;
+                        width: 95%;
                         font-size: 18px;
-                        margin-bottom: 5px;
-                        margin-left: 2px;
-                        
+                        transition: 0.5s ease;
+                        border: 2px solid $secondary;
+
+                        &:hover {
+                            border: 2px solid $secondary;
+                            background-color: transparent;
+                            color: $secondary;
+                            width: 100%;
+                        }
+
+                        svg {
+                            font-size: 18px;
+                            margin-bottom: 5px;
+                            margin-left: 2px;
+
+                        }
                     }
                 }
             }
+
         }
-        
+
+        .login-right-side {
+            width: 10%;
+        }
+    }
+
+    .footer{
+        color: white;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 200;
+        padding: 10px;
+        @include md{
+            padding-bottom: 10px;
+            font-weight: 300;
+            font-size: 16px;
+        }
     }
 }

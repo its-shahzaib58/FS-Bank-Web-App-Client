@@ -11,7 +11,7 @@ export default function Header() {
   axios.post("http://localhost:8000/auth/logout", {_id:user._id}).then((res)=>{
     console.log(res.data.message)
     dispatch({type:"LOGGED_OUT", user:null})
-    window.localStorage.removeItem("token")
+    window.sessionStorage.removeItem("token")
   
   }).catch((error)=>{
     console.log(error)

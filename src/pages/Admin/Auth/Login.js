@@ -34,59 +34,69 @@ export default function Login() {
         return setLoginData(initState)
       }
       openNotificationWithIcon("success", res.data.message)
-      window.localStorage.setItem("token",res.data.token)
+      window.sessionStorage.setItem("token", res.data.token)
       setLoginData(initState)
       const decodeAdmin = jwtDecode(res.data.token);
       const userData = decodeAdmin.userData;
-      dispatch({type:"LOGGED_IN", payload:userData})
+      dispatch({ type: "LOGGED_IN", payload: userData })
       setIsLoading(false)
-      
+
 
     }).catch((error) => {
       console.error(error)
       setIsLoading(false)
     })
+    
   }
   return (
     <>
       {contextHolder}
       <div className="main-login-bg">
-
       </div>
       <div className="main-login">
-        <div className="login-left-side"></div>
-        <div className="login-center-side">
-          <div className="login-box">
-            <div className="top">
-              <span className='text-center'>Welcome to</span>
-              <h5>FS Bank</h5>
-            </div>
-            <div className="bottom">
-              <h4 className='text-center'>Login</h4>
-              <form onSubmit={(e) => handleLogin(e)} method='POST'>
-                <label>Username:</label>
-                <input type="text" name="username" value={loginData.username} onChange={(e) => handleChange(e)} placeholder='Enter username' required />
-                <label>Password:</label>
-                <input type="password" name="password" value={loginData.password} onChange={(e) => handleChange(e)} placeholder='Enter password' required />
-                {/* <Link>Forgotten Password?</Link> */}
-                <button type="submit" disabled={isLoading}>
-                  {
-                    !isLoading ?
-                      <>
-                        Login
-                        <LoginOutlined />
-                      </>
-                      :
-                      <LoadingOutlined />
-                  }
-                </button>
+        <div className="login-top">
+          <div className="login-left-side"></div>
+          <div className="login-center-side">
+            <div className="login-box">
+              <div className="top">
+                <span className='text-center'>Welcome to</span>
+                <h5>FS Bank</h5>
+              </div>
+              <div className="bottom">
+                <h4 className='text-center'>Login</h4>
+                <form onSubmit={(e) => handleLogin(e)} method='POST'name='form01' >
+                  <label className='label_username'>Username:</label>
+                  <input type="text" name="username" id="username_input" value={loginData.username} onChange={(e) => handleChange(e)} placeholder='Enter username' required autoComplete='admin1' />
+                  <b className='input_error'>Username is required!</b>
+                  <br />
+                  <label className='label'>Password:</label>
+                  <input type="password" name="password" value={loginData.password} onChange={(e) => handleChange(e)} placeholder='Enter password' required />
+                  <b className='input_error'>Password is required!</b>
+                  {/* <Link>Forgotten Password?</Link> */}
+                  <button type="submit" disabled={isLoading}>
+                    {
+                      !isLoading ?
+                        <>
+                          Login
+                          <LoginOutlined />
+                        </>
+                        :
+                        <LoadingOutlined />
+                    }
+                  </button>
 
-              </form>
+                </form>
+              </div>
             </div>
           </div>
+          <div className="login-right-side"></div>
         </div>
-        <div className="login-right-side"></div>
+        <div className="footer">
+        <span>All Copyrights Reserved 2023 &copy; FS Bank Online Develop by M. Shahzaib Ramzan</span>
       </div>
+      </div>
+      
+
     </>
   )
 }
