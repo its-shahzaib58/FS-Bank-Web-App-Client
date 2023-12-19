@@ -8,7 +8,7 @@ import { useAdminAuthContext } from 'contexts/AdminAuthContext';
 export default function Header() {
   const {dispatch,user} = useAdminAuthContext()
   const  handleLogout = ()=>{
-  axios.post("http://localhost:8000/auth/logout", {_id:user._id}).then((res)=>{
+  axios.post("https://fs-bank-web-app-server.vercel.app/auth/logout", {_id:user._id}).then((res)=>{
     console.log(res.data.message)
     dispatch({type:"LOGGED_OUT", user:null})
     window.sessionStorage.removeItem("token")
@@ -54,7 +54,7 @@ export default function Header() {
           <Link to='/myaccount'>
             <UserOutlined />
           </Link>
-          <b>|</b>
+          
           <LogoutOutlined onClick={()=>handleLogout()} />
 
         </div>

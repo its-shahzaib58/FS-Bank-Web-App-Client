@@ -1,4 +1,4 @@
-$primary : #a60c0c;
+$primary : #0039a6;
 $secondary : #0039a6;
 @import '~bootstrap/scss/bootstrap.scss';
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Montserrat:wght@300&display=swap');
@@ -8,3 +8,6 @@ $secondary : #0039a6;
 @import 'scss/admin/sidebar.scss';
 @import 'scss/admin/main.scss';
 @import 'scss/admin/login.scss';
+@import 'scss/admin/opening_account.scss';
+@import 'scss/admin/accounts.scss';
+@import 'scss/admin/single_account.scss';

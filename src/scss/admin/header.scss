@@ -68,7 +68,7 @@
     position: fixed;
     top: 0;
     font-family: 'Montserrat', sans-serif;
-
+    z-index: 100;
     @include md {
         background-color: $secondary;
         color: white;
@@ -156,7 +156,7 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     position: fixed;
     top: 60;
-
+    z-index: 100;
     @include md {
         display: none;
     }

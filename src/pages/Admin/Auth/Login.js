@@ -27,7 +27,7 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     setIsLoading(true)
-    axios.post('http://localhost:8000/auth/login', loginData).then((res) => {
+    axios.post('https://fs-bank-web-app-server.vercel.app/auth/login', loginData).then((res) => {
       if (res.data.message === "Password is incorrect! Try Again" || res.data.message === "This username is not exist!") {
         openNotificationWithIcon("error", res.data.message)
         setIsLoading(false)
@@ -39,11 +39,12 @@ export default function Login() {
       const decodeAdmin = jwtDecode(res.data.token);
       const userData = decodeAdmin.userData;
       dispatch({ type: "LOGGED_IN", payload: userData })
+      
       setIsLoading(false)
 
 
     }).catch((error) => {
-      console.error(error)
+      openNotificationWithIcon("error",error.message,"Server is disconnected! Try Again")
       setIsLoading(false)
     })
 
@@ -66,11 +67,11 @@ export default function Login() {
                 <h4 className='text-center'>Login</h4>
                 <form onSubmit={(e) => handleLogin(e)} method='POST' name='form01' >
                   <label className='label_username'>Username:</label>
-                  <input type="text" name="username" id="username_input" value={loginData.username} onChange={(e) => handleChange(e)} placeholder='Enter username' required autoComplete='admin1' />
+                  <input type="text" name="username" className='form-control' id="username_input" value={loginData.username} onChange={(e) => handleChange(e)} placeholder='Enter username' required autoComplete='admin1' />
                   <b className='input_error'>Username is required!</b>
                   <br />
                   <label className='label'>Password:</label>
-                  <input type="password" name="password" value={loginData.password} onChange={(e) => handleChange(e)} placeholder='Enter password' required />
+                  <input type="password" className='form-control' name="password" value={loginData.password} onChange={(e) => handleChange(e)} placeholder='Enter password' required />
                   <b className='input_error'>Password is required!</b>
                   {/* <Link>Forgotten Password?</Link> */}
                   <button type="submit" disabled={isLoading}>
@@ -95,8 +96,6 @@ export default function Login() {
           <span>All Copyrights Reserved 2023 &copy; FS Bank Online Develop by M. Shahzaib Ramzan</span>
         </div>
       </div>
-
-
     </>
   )
 }

@@ -1,0 +1,155 @@
+.main_single_account{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    .top {
+        width: 100%;
+        color: white;
+        padding: 10px;
+        // background-color: rgb(145, 200, 252);
+        background-image: url('../../assets/imgs/login_bg.jpg');
+        font-size: 14px;
+        font-weight: bold;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .center {
+        padding: 10px;
+
+        .personal_details {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px;
+            font-weight: bold;
+            .iban{
+                width: 50%;
+            }
+            .system_id{
+                width: 50%;
+                
+            }
+            .firstname {
+                width: 33%;
+                padding-left: 5px;
+            }
+
+            .lastname {
+                width: 33%;
+                padding-left: 10px;
+            }
+
+            .mothername {
+                width: 33%;
+            }
+
+            .cnic {
+                width: 50%;
+            }
+
+            .phoneNo {
+                width: 50%;
+            }
+
+            .email {
+                width: 50%;
+            }
+
+            .permanent_address {
+                width: 100%;
+            }
+
+            .postel_address {
+                width: 100%;
+
+                .sameAsAbove {
+                    // padding-left: 400px;
+                    float: right;
+                }
+            }
+
+            .account_type {
+                width: 50%;
+            }
+
+            .plan {
+                width: 100%;
+                transform: scale(0,0);
+                transition: 0.5s ease-out;
+                display: none;
+            }
+            .plan_show{
+                display: block;
+                transition: 0.5s ease-in;
+                transform: scale(1,1);
+            }
+            .generate_iban{
+                width: 30%;
+            }
+            .show_iban{
+                width: 70%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding-top: 10px;
+                
+            }
+            .generate_iban_btn{
+                background-color: $primary;
+
+                &:disabled{
+                    background-color: rgba(0, 0, 255, 0.473);
+                    border: none;
+                    cursor:no-drop;
+                }
+                &:hover{
+                    background-color: rgba(0, 0, 255, 0.473);
+                    background-image: none;
+                    border-radius: 10px;
+                    width: 95%;
+                    border: 0;
+                }
+            }
+            .generate_iban_hide{
+                display: none;
+            }
+            .submit_btn {
+                text-align: center;
+            }
+
+            button {
+                margin-top: 10px;
+                background-color: $secondary;
+                color: white;
+                font-weight: bold;
+                border-radius: 10px;
+                border: none;
+                height: 40px;
+                width: 95%;
+                font-size: 18px;
+                transition: 0.5s ease-in-out;
+                border: 2px solid $secondary;
+                &:disabled{
+                    background-color: rgba(0, 0, 255, 0.473);
+                    border: none;
+                }
+                &:hover {
+                    border: none;
+                    background-image: url('../../assets/imgs/login_bg.jpg');
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    color: white;
+                    width: 100%;
+                    border-top-left-radius: 0px;
+                    border-bottom-left-radius: 0px;
+                }
+
+            }
+        }
+    }
+}
