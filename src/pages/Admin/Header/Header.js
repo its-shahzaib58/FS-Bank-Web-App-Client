@@ -1,22 +1,25 @@
 import { HomeFilled, MenuOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons'
 import React from 'react'
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SidebarData from '../Sidebar/SidebarData';
 import axios from 'axios';
 import { useAdminAuthContext } from 'contexts/AdminAuthContext';
 
 export default function Header() {
-  const {dispatch,user} = useAdminAuthContext()
-  const  handleLogout = ()=>{
-  axios.post("https://fs-bank-web-app-server.vercel.app/auth/logout", {_id:user._id}).then((res)=>{
-    console.log(res.data.message)
-    dispatch({type:"LOGGED_OUT", user:null})
-    window.sessionStorage.removeItem("token")
-  
-  }).catch((error)=>{
-    console.log(error)
-  })
- }
+  const { dispatch, user } = useAdminAuthContext()
+  const [isLoadingLogout, setLoadingLogout] = useState(false);
+  const handleLogout = () => {
+    setLoadingLogout(true)
+    axios.post("https://fs-bank-web-app-server.vercel.app/auth/logout", { _id: user._id }).then((res) => {
+      console.log(res.data.message)
+      dispatch({ type: "LOGGED_OUT", user: null })
+      window.sessionStorage.removeItem("token")
+      setLoadingLogout(false);
+    }).catch((error) => {
+      console.log(error)
+      setLoadingLogout(false);
+    })
+  }
   return (
     <>
       <div className="offcanvas offcanvas-start bg-secondary text-light w-50" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
@@ -42,21 +45,24 @@ export default function Header() {
             <span>  <UserOutlined /> My Account</span>
           </Link>
           <span>|</span>
-          <span onClick={()=>handleLogout()}> <LogoutOutlined />   Logout</span>
-          
+          <span onClick={() => handleLogout()}> <LogoutOutlined /> {isLoadingLogout ? <LoadingOutlined /> : "Logout"}</span>
+
         </div>
       </div>
       <div className="sub-header">
         <div className="left-side">
-         <Link to="/"> <HomeFilled /></Link>
+          <Link to="/"> <HomeFilled /></Link>
         </div>
         <div className="right-side">
           <Link to='/myaccount'>
             <UserOutlined />
           </Link>
-          
-          <LogoutOutlined onClick={()=>handleLogout()} />
-
+          {
+            isLoadingLogout ?
+              <LoadingOutlined />
+              :
+              <LogoutOutlined onClick={() => handleLogout()} />
+          }
         </div>
       </div>
     </>
