@@ -1,5 +1,5 @@
-import { HomeFilled, MenuOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons'
-import React from 'react'
+import { HomeFilled, MenuOutlined, UserOutlined, LogoutOutlined, LoadingOutlined } from '@ant-design/icons'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import SidebarData from '../Sidebar/SidebarData';
 import axios from 'axios';
@@ -45,8 +45,12 @@ export default function Header() {
             <span>  <UserOutlined /> My Account</span>
           </Link>
           <span>|</span>
-          <span onClick={() => handleLogout()}> <LogoutOutlined /> {isLoadingLogout ? <LoadingOutlined /> : "Logout"}</span>
-
+          {
+          isLoadingLogout?
+          <span><LoadingOutlined/></span>
+          :
+          <span onClick={() => handleLogout()}> <LogoutOutlined />  Logout</span>
+          } 
         </div>
       </div>
       <div className="sub-header">
