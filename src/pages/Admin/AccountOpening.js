@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import dayjs from 'dayjs';
 import CryptoJS from 'crypto-js';
 import { ConfigProvider, Popconfirm, message, notification } from 'antd';
@@ -27,7 +27,7 @@ const initStateAccountData = {
 }
 export default function AccountOpening() {
   const { user } = useAdminAuthContext();
-  const {accounts, dispatch} = useAccountsContext();
+  const { accounts, dispatch } = useAccountsContext();
   const [accountsData, setAccountsData] = useState(accounts);
   const notificationSound = new Audio(water_drop);
   notificationSound.loop = false;
@@ -41,7 +41,6 @@ export default function AccountOpening() {
   const [sameAddress, setSameAddress] = useState(false);
   const [accountNumberFunctionIsCompleted, setAccountNumberFunctionIsCompleted] = useState(false)
   const [minDateDob] = useState(dayjs().subtract(18, 'year').format("YYYY-MM-DD"));
-  const navigate = useNavigate();
   // Notification Function
   const [api, contextHolder] = notification.useNotification();
   const openNotificationWithIcon = (type, message, description) => {
@@ -145,7 +144,7 @@ export default function AccountOpening() {
           setAccountNumber(newAccountNumber);
           setAccountNumberFunctionIsCompleted(true);
           setGenerateLoading(false);
-          
+
         }
       }).catch((error) => {
         setAccountNumberFunctionIsCompleted(false)
@@ -157,10 +156,9 @@ export default function AccountOpening() {
   // Handle Submit Account Data
   const handleSubmit = e => {
     setIsLoading(true)
-    if(!accountNumberFunctionIsCompleted)
-    {
+    if (!accountNumberFunctionIsCompleted) {
       notificationSound.play()
-      openNotificationWithIcon("warning","Please First Generate IBAN!");
+      openNotificationWithIcon("warning", "Please First Generate IBAN!");
       setIsLoading(false)
     }
     // Creating EncrypedAccountData Object
@@ -208,6 +206,86 @@ export default function AccountOpening() {
             setAccountNumber("")
             return openNotificationWithIcon("error", `This Customer Already Exist! CNIC:${res.data.message.keyValue.cnic}`);
           }
+          // Eamil Sending
+          const EmailData = {
+            to: accountDataBeforeEncryped.email,
+            subject: "FS BANK | Account Opening",
+            html: `
+            <!DOCTYPE html>
+              <html lang="en">
+              <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link href="https://gitfonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+                <title>FS Bank</title>
+                <style>
+                  body {
+                    font-family: 'Montserrat', sans-serif;
+                    margin: 0;
+                    padding: 0;
+                    background-color: #f4f4f4;
+                  }
+
+                  .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    background-color: #fff;
+                    border-radius: 5px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                  }
+
+                  h1 {
+                    color: #333;
+                  }
+
+                  p {
+                    color: #555;
+                  }
+
+                  .button {
+                    display: inline-block;
+                    padding: 10px 20px;
+                    background-color: #007BFF;
+                    color: #fff;
+                    text-decoration: none;
+                    border-radius: 3px;
+                  }
+
+                  .footer {
+                    margin-top: 20px;
+                    padding-top: 10px;
+                    border-top: 1px solid #ddd;
+                    text-align: center;
+                    color: #777;
+                  }
+                </style>
+              </head>
+
+              <body>
+                <div class="container">
+                  <h3>Welcome to</h3>
+                  <img width="150"
+                    src="https://res.cloudinary.com/de52siew7/image/upload/f_auto,q_auto/v1/FS_BANK/fsbanklogo" />
+                    <h1>Hello, ${accountDataBeforeEncryped.firstname}</h1>
+                    <p>Congratulations on opening your new bank account with us. We are delighted to have you as our valued customer.</p>
+                    
+                    <p>Your International Bank Account Number (IBAN) is:</p>
+                    <div class="iban">IBAN: ${finalAccountDataEncryped.iban}</div>
+                
+                  <div class="footer">
+                    <p class="note">Please keep this information secure and do not share it with anyone. If you have any questions or need assistance, feel free to contact our customer support.</p>
+                  </div>
+                </div>
+              </body>
+              </html>
+            `
+          }
+          axios.post("https://fs-bank-web-app-server.vercel.app/send-email", EmailData).then((res) => {
+            console.log(res.status)
+          });
           setAccountData(initStateAccountData)
           setAccountType("");
           setPermanentAddress("");
@@ -219,7 +297,7 @@ export default function AccountOpening() {
           setAccountNumberFunctionIsCompleted(false)
           setAccountNumber("")
           setAccountsData(accounts.push(finalAccountData))
-          dispatch({type:"IN",payload:accountsData});
+          dispatch({ type: "IN", payload: accountsData });
         }).catch((err) => {
           setIsLoading(false)
           notificationSound.play()
@@ -346,8 +424,8 @@ export default function AccountOpening() {
                     okText="Yes"
                     cancelText="No"
                   >
-                  
-                    <button className={!accountNumberFunctionIsCompleted?"d-none":"d-block"}>
+
+                    <button className={!accountNumberFunctionIsCompleted ? "d-none" : "d-block"}>
                       {
                         !isLoading ?
                           "Submit" :
