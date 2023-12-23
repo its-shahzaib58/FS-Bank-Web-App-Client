@@ -364,7 +364,7 @@ export default function AccountOpening() {
               <div className="postel_address">
                 <label>9.  Postal Address  <span className="text-danger">*</span></label>
                 <label className='sameAsAbove' htmlFor="sameAsAbove">Same as above  &nbsp;  <input type="checkbox" className='form-check-input' id="sameAsAbove" onChange={(e) => handleSameAsAbove(e)} checked={sameAddress} /></label>
-                <textarea className='form-control' disabled={sameAddress} value={postalAddress} onChange={(e) => { handleChangePostalAdd(e) }} name='postal_address' placeholder='Enter Postel Address'></textarea>
+                <textarea className='form-control' disabled={sameAddress} value={postalAddress} onChange={(e) => { handleChangePostalAdd(e) }} name='postal_address' placeholder='Enter Postal Address'></textarea>
               </div>
             </div>
             <h6><b>Accounts Detail of Customer</b></h6>
