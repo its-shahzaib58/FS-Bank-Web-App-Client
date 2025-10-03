@@ -27,7 +27,7 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     setIsLoading(true)
-    axios.post('https://fs-bank-web-app-server.vercel.app/auth/login', loginData).then((res) => {
+    axios.post('https://fs-bank-web-app-server.onrender.com/auth/login', loginData).then((res) => {
       if (res.data.message === "Password is incorrect! Try Again" || res.data.message === "This username is not exist!") {
         openNotificationWithIcon("error", res.data.message)
         setIsLoading(false)
